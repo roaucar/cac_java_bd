@@ -10,7 +10,7 @@ public class TestBD {
 
     public static void main(String[] args) {
 
-        var url = "jdbc:mysql://localhost/oradores";
+        var url = "jdbc:mysql://localhost/phpmyadmin/index.php?route=/database/structure&db=oradores";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
