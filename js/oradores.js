@@ -11,7 +11,6 @@ public class TestBD {
     public static void main(String[] args) {
 
         var url = "jdbc:mysql://localhost/oradores";
-        // Cambia 'oradores' por el nombre correcto de tu base de datos
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -21,9 +20,7 @@ public class TestBD {
 
         try {
 
-            Connection conexion = DriverManager.getConnection(url, "root", "");
-            // Reemplaza 'root' y '' por tu nombre de usuario y contraseña de MySQL
-
+            Connection conexion = DriverManager.getConnection(url, "root@localhost", "");
             Statement instruccion = conexion.createStatement();
             var sql = "SELECT * FROM oradores";
             ResultSet resultado = instruccion.executeQuery(sql);
@@ -36,9 +33,9 @@ public class TestBD {
                         + "    <div class=\"card\">\n"
                         + "        <img src=\"./assets/img/" + resultado.getString("imagen") + "\" class=\"card-img-top\" alt=\"" + nombreOrador + " " + apellidoOrador + "\">\n"
                         + "        <div class=\"card-body\">\n"
-                        + "            <h5 class=\"java badge bg-warning text-dark\">" + especialidadOrador + "</h5>\n"
-                        + "            <h3 class=\"card-title\">" + nombreOrador + " " + apellidoOrador + "</h3>\n"
-                        + "            <p class=\"card-text lh-lg pb-2\">" + descripcionOrador + "</p>\n"
+                        + "            <h5 class=\"java badge bg-warning text-dark\">" + temaOrador + "</h5>\n"
+                        + "            <h3 class=\"card-title\">" + nombreOrador + "</h3>\n"
+                        + "            <p class=\"card-text lh-lg pb-2\">" + textoOrador + "</p>\n"
                         + "        </div>\n"
                         + "    </div>\n"
                         + "</div>";
