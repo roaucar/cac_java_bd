@@ -1,3 +1,9 @@
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.DriverManager"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.Statement"%>
+<%@ page import="java.sql.SQLException"%>
+<%@ page import="java.util.logging.Logger"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -71,7 +77,42 @@
             <div id="oradores" class="oradoresSection container-fluid bg-white">
                 <h2 class="oradoresTitle"><span class="conoce fw-light">CONOCE A LOS</span><br> ORADORES</h2>
                 <div class="row d-flex flex-wrap">
-                    
+            <% 
+                var url = "jdbc:mysql://localhost:3306/oradores";
+
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(TestBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                try {
+                    Connection conexion = DriverManager.getConnection(url, "root", ""); // Ajusta las credenciales
+                    Statement instruccion = conexion.createStatement();
+                    var sql = "SELECT * FROM oradores";
+                    ResultSet resultado = instruccion.executeQuery(sql);
+
+                    while (resultado.next()) {
+                        String nombreOrador = resultado.getString("nombre");
+                        String temaOrador = resultado.getString("tema");
+                        String textoOrador = resultado.getString("texto");
+                %>
+                        <div class="col-xxl-4 col-xl-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <img src="./assets/img/<%= resultado.getString("imagen") %>" class="card-img-top" alt="<%= nombreOrador %>">
+                                <div class="card-body">
+                                    <h5 class="java badge bg-warning text-dark"><%= temaOrador %></h5>
+                                    <h3 class="card-title"><%= nombreOrador %></h3>
+                                    <p class="card-text lh-lg pb-2"><%= textoOrador %></p>
+                                </div>
+                            </div>
+                        </div>
+                <%
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(TestBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                %>        
                 </div>
             </div>
             <div id="lugarFecha" class="container-fluid">
