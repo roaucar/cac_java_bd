@@ -1,3 +1,4 @@
+Copy code
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,7 +11,7 @@ public class TestBD {
 
     public static void main(String[] args) {
 
-        var url = "jdbc:mysql://localhost/phpmyadmin/index.php?route=/database/structure&db=oradores";
+        var url = "jdbc:mysql://localhost/oradores";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -20,18 +21,18 @@ public class TestBD {
 
         try {
 
-            Connection conexion = DriverManager.getConnection(url, "root@localhost", "");
+            Connection conexion = DriverManager.getConnection(url, "root@localhost");
             Statement instruccion = conexion.createStatement();
             var sql = "SELECT * FROM oradores";
             ResultSet resultado = instruccion.executeQuery(sql);
 
             while (resultado.next()) {
                 String nombreOrador = resultado.getString("nombre");
-                String especialidadOrador = resultado.getString("tema");
-                String descripcionOrador = resultado.getString("texto");
+                String temaOrador = resultado.getString("tema");
+                String textoOrador = resultado.getString("texto");
                 String htmlOrador = "<div class=\"col-xxl-4 col-xl-4 col-md-4 col-sm-12 col-xs-12\">\n"
                         + "    <div class=\"card\">\n"
-                        + "        <img src=\"./assets/img/" + resultado.getString("imagen") + "\" class=\"card-img-top\" alt=\"" + nombreOrador + " " + apellidoOrador + "\">\n"
+                        + "        <img src=\"./assets/img/" + resultado.getString("imagen") + "\" class=\"card-img-top\" alt=\"" + nombreOrador + "\">\n"
                         + "        <div class=\"card-body\">\n"
                         + "            <h5 class=\"java badge bg-warning text-dark\">" + temaOrador + "</h5>\n"
                         + "            <h3 class=\"card-title\">" + nombreOrador + "</h3>\n"
@@ -48,5 +49,4 @@ public class TestBD {
         }
 
     }
-
 }
