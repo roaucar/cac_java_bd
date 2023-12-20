@@ -4,7 +4,7 @@ import java.util.List;
 public class TestBD {
 
     public static void main(String[] args) {
-        var url = "jdbc:mysql://localhost:3306/oradores";
+        var url = "jdbc:mysql://localhost:3306/oradores?useSSL=false&useTimezone=true&serverTimezone=UTC";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -13,7 +13,7 @@ public class TestBD {
         }
 
         try {
-            Connection conexion = DriverManager.getConnection(url, "root@localhost");
+            Connection conexion = DriverManager.getConnection(url, user:"root",password:"");
             Statement instruccion = conexion.createStatement();
             var sql = "SELECT * FROM oradores";
             ResultSet resultado = instruccion.executeQuery(sql);
