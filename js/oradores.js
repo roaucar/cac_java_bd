@@ -50,3 +50,4 @@ public class TestBD {
     }
 }
 
+java TestBD > output.js
