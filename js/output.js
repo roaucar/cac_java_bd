@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class oradores {
+public class htmloradores {
 
     public static void main(String[] args) {
         var url = "jdbc:mysql://localhost:3306/oradores?useSSL=false&useTimezone=true&serverTimezone=UTC";
@@ -15,7 +15,7 @@ public class oradores {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(oradores.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(htmloradores.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
@@ -56,4 +56,4 @@ public class oradores {
     }
 }
 
-
+java htmloradores > output.js
