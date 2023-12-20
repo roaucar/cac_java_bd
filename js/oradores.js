@@ -1,15 +1,9 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestBD {
 
     public static void main(String[] args) {
-
         var url = "jdbc:mysql://localhost:3306/oradores";
 
         try {
@@ -19,11 +13,12 @@ public class TestBD {
         }
 
         try {
-
             Connection conexion = DriverManager.getConnection(url, "root@localhost");
             Statement instruccion = conexion.createStatement();
             var sql = "SELECT * FROM oradores";
             ResultSet resultado = instruccion.executeQuery(sql);
+
+            List<String> htmlOradores = new ArrayList<>();
 
             while (resultado.next()) {
                 String nombreOrador = resultado.getString("nombre");
@@ -40,12 +35,18 @@ public class TestBD {
                         + "    </div>\n"
                         + "</div>";
 
-                System.out.println(htmlOrador);
+                htmlOradores.add(htmlOrador);
             }
+
+            System.out.println("var oradoresHtml = [");
+            for (String htmlOrador : htmlOradores) {
+                System.out.println("    '" + htmlOrador.replace("'", "\\'") + "',");
+            }
+            System.out.println("];");
 
         } catch (SQLException ex) {
             Logger.getLogger(TestBD.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 }
+
